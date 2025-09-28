@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import Header from "./header";
 
 export const metadata: Metadata = {
   title: "Frontend Mentor | Weather app",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-neutral-900">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
