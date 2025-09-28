@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { dmSans } from "./fonts";
+import clsx from "clsx";
 
 import {
   Menu,
@@ -14,6 +16,10 @@ import {
 } from "@headlessui/react";
 
 export default function UnitsDropdown() {
+  const [isCelsius, setIsCelsius] = useState(true);
+  const [isKilometersPerHour, setIsKilometersPerHour] = useState(true);
+  const [isMillimeters, setIsMillimeters] = useState(true);
+
   return (
     <Menu>
       <MenuButton className="bg-neutral-800 hover:bg-neutral-700 focus:outline-2 focus:outline-neutral-0 focus:outline-offset-3 px-125 py-100 rounded-6 flex items-center gap-1.5">
@@ -56,16 +62,46 @@ export default function UnitsDropdown() {
           </MenuHeading>
           <MenuItem>
             <button
-              className={` rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1`}
+              className={clsx(
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                isCelsius && "bg-neutral-700",
+              )}
+              onClick={event => {
+                event.preventDefault();
+                setIsCelsius(true);
+              }}
             >
               <span>Celsius (&deg;C)</span>
+              {isCelsius && (
+                <Image
+                  src="/images/icon-checkmark.svg"
+                  alt="Checkmark icon."
+                  width={14}
+                  height={11}
+                />
+              )}
             </button>
           </MenuItem>
           <MenuItem>
             <button
-              className={`rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1`}
+              className={clsx(
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                !isCelsius && "bg-neutral-700",
+              )}
+              onClick={event => {
+                event.preventDefault();
+                setIsCelsius(false);
+              }}
             >
               <span>Fahrenheit (&deg;F)</span>
+              {!isCelsius && (
+                <Image
+                  src="/images/icon-checkmark.svg"
+                  alt="Checkmark icon."
+                  width={14}
+                  height={11}
+                />
+              )}
             </button>
           </MenuItem>
         </MenuSection>
@@ -81,16 +117,46 @@ export default function UnitsDropdown() {
           </MenuHeading>
           <MenuItem>
             <button
-              className={`rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1`}
+              className={clsx(
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                isKilometersPerHour && "bg-neutral-700",
+              )}
+              onClick={event => {
+                event.preventDefault();
+                setIsKilometersPerHour(true);
+              }}
             >
               <span>km/h</span>
+              {isKilometersPerHour && (
+                <Image
+                  src="/images/icon-checkmark.svg"
+                  alt="Checkmark icon."
+                  width={14}
+                  height={11}
+                />
+              )}
             </button>
           </MenuItem>
           <MenuItem>
             <button
-              className={`rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1`}
+              className={clsx(
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                !isKilometersPerHour && "bg-neutral-700",
+              )}
+              onClick={event => {
+                event.preventDefault();
+                setIsKilometersPerHour(false);
+              }}
             >
               <span>mph</span>
+              {!isKilometersPerHour && (
+                <Image
+                  src="/images/icon-checkmark.svg"
+                  alt="Checkmark icon."
+                  width={14}
+                  height={11}
+                />
+              )}
             </button>
           </MenuItem>
         </MenuSection>
@@ -106,16 +172,46 @@ export default function UnitsDropdown() {
           </MenuHeading>
           <MenuItem>
             <button
-              className={`rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1`}
+              className={clsx(
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                isMillimeters && "bg-neutral-700",
+              )}
+              onClick={event => {
+                event.preventDefault();
+                setIsMillimeters(true);
+              }}
             >
               <span>Millimeters (mm)</span>
+              {isMillimeters && (
+                <Image
+                  src="/images/icon-checkmark.svg"
+                  alt="Checkmark icon."
+                  width={14}
+                  height={11}
+                />
+              )}
             </button>
           </MenuItem>
           <MenuItem>
             <button
-              className={`rounded-8 px-100 py-125  w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1`}
+              className={clsx(
+                "rounded-8 px-100 py-125  w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                !isMillimeters && "bg-neutral-700",
+              )}
+              onClick={event => {
+                event.preventDefault();
+                setIsMillimeters(false);
+              }}
             >
               <span>Inches (in)</span>
+              {!isMillimeters && (
+                <Image
+                  src="/images/icon-checkmark.svg"
+                  alt="Checkmark icon."
+                  width={14}
+                  height={11}
+                />
+              )}
             </button>
           </MenuItem>
         </MenuSection>
