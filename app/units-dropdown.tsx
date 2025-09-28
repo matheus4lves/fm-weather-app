@@ -19,6 +19,21 @@ export default function UnitsDropdown() {
   const [isCelsius, setIsCelsius] = useState(true);
   const [isKilometersPerHour, setIsKilometersPerHour] = useState(true);
   const [isMillimeters, setIsMillimeters] = useState(true);
+  const [isMetric, setIsMetric] = useState(true);
+
+  function toggleMeasurementSystem() {
+    if (isMetric) {
+      setIsMetric(false);
+      setIsCelsius(false);
+      setIsKilometersPerHour(false);
+      setIsMillimeters(false);
+    } else {
+      setIsMetric(true);
+      setIsCelsius(true);
+      setIsKilometersPerHour(true);
+      setIsMillimeters(true);
+    }
+  }
 
   return (
     <Menu>
@@ -48,8 +63,11 @@ export default function UnitsDropdown() {
         className={`[--anchor-gap:10px] text-preset-7 text-neutral-0 ${dmSans.className} font-medium bg-neutral-800 rounded-12 px-100 py-075 flex flex-col w-53.5 `}
       >
         <MenuItem>
-          <button className="px-100 py-125 mb-050 rounded-8 w-full text-start hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1">
-            Switch to Imperial
+          <button
+            className="px-100 py-125 mb-050 rounded-8 w-full text-start hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1"
+            onClick={() => toggleMeasurementSystem()}
+          >
+            {isMetric ? "Switch to Imperial" : "Switch to Metric"}
           </button>
         </MenuItem>
 
