@@ -3,9 +3,9 @@ import UnitsDropdown from "./units-dropdown";
 
 export default function Header() {
   return (
-    <header className="flex justify-between h-8.25 mt-200 mr-200 mb-600 ml-200">
+    <header className="flex items-center justify-between mt-200 mx-200 mb-600 ">
       <Image
-        className="w-auto h-7 self-center"
+        className="w-auto h-7 md:h-10"
         src="/images/logo.svg"
         alt="Site logo."
         width={197}

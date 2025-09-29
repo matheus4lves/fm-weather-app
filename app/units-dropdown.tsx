@@ -37,21 +37,21 @@ export default function UnitsDropdown() {
 
   return (
     <Menu>
-      <MenuButton className="bg-neutral-800 hover:bg-neutral-700 focus:outline-2 focus:outline-neutral-0 focus:outline-offset-3 px-125 py-100 rounded-6 flex items-center gap-1.5">
+      <MenuButton className="bg-neutral-800 hover:bg-neutral-700 focus:outline-2 focus:outline-neutral-0 focus:outline-offset-3 px-125 md:px-200 py-100 md:py-150 rounded-6 md:rounded-8 flex items-center gap-1.5 md:gap-2.5">
         <Image
-          className="w-3.5 h-3.5"
+          className="w-3.5 md:w-200 h-3.5 md:h-200"
           src="/images/icon-units.svg"
           alt="Gear icon."
           width={16}
           height={16}
         />
         <span
-          className={`${dmSans.className} font-medium text-preset-8 text-neutral-0`}
+          className={`${dmSans.className} font-medium text-preset-8 md:text-[16px] text-neutral-0`}
         >
           Units
         </span>
         <Image
-          className="w-2.25 h-3.5"
+          className="w-2.25 md:w-3 h-3.5 md:h-4.5"
           src="/images/icon-dropdown.svg"
           alt="Dropdown icon."
           width={13}
