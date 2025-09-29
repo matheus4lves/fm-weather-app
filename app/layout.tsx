@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./header";
+import { dmSans } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Frontend Mentor | Weather app",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-neutral-900">
+      <body
+        className={`bg-neutral-900 pt-200 px-200 pb-600 h-screen ${dmSans.className}`}
+      >
         <Header />
         {children}
       </body>
