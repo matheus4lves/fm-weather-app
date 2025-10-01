@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
-import { dmSans } from "./fonts";
-import clsx from "clsx";
 
+// External libraries
+import clsx from "clsx";
 import {
   Menu,
   MenuButton,
@@ -14,6 +13,14 @@ import {
   MenuSection,
   MenuSeparator,
 } from "@headlessui/react";
+
+// Fonts
+import { dmSans } from "./fonts";
+
+// Components
+import GearIcon from "./gear-icon";
+import DropdownIcon from "./dropdown-icon";
+import CheckmarkIcon from "./checkmark-icon";
 
 export default function UnitsDropdown() {
   const [isCelsius, setIsCelsius] = useState(true);
@@ -38,25 +45,13 @@ export default function UnitsDropdown() {
   return (
     <Menu>
       <MenuButton className="bg-neutral-800 hover:bg-neutral-700 focus:outline-2 focus:outline-neutral-0 focus:outline-offset-3 px-125 md:px-200 py-100 md:py-150 rounded-6 md:rounded-8 flex items-center gap-1.5 md:gap-2.5">
-        <Image
-          className="w-3.5 md:w-200 h-3.5 md:h-200"
-          src="/images/icon-units.svg"
-          alt="Gear icon."
-          width={16}
-          height={16}
-        />
+        <GearIcon className="w-3.5 md:w-200 h-3.5 md:h-200" />
         <span
           className={`${dmSans.className} font-medium text-preset-8 md:text-[16px] text-neutral-0`}
         >
           Units
         </span>
-        <Image
-          className="w-2.25 md:w-3 h-3.5 md:h-4.5"
-          src="/images/icon-dropdown.svg"
-          alt="Dropdown icon."
-          width={13}
-          height={8}
-        />
+        <DropdownIcon className="w-2.25 md:w-3 h-3.5 md:h-4.5" />
       </MenuButton>
       <MenuItems
         anchor="bottom end"
@@ -90,14 +85,7 @@ export default function UnitsDropdown() {
               }}
             >
               <span>Celsius (&deg;C)</span>
-              {isCelsius && (
-                <Image
-                  src="/images/icon-checkmark.svg"
-                  alt="Checkmark icon."
-                  width={14}
-                  height={11}
-                />
-              )}
+              {isCelsius && <CheckmarkIcon />}
             </button>
           </MenuItem>
           <MenuItem>
@@ -112,14 +100,7 @@ export default function UnitsDropdown() {
               }}
             >
               <span>Fahrenheit (&deg;F)</span>
-              {!isCelsius && (
-                <Image
-                  src="/images/icon-checkmark.svg"
-                  alt="Checkmark icon."
-                  width={14}
-                  height={11}
-                />
-              )}
+              {!isCelsius && <CheckmarkIcon />}
             </button>
           </MenuItem>
         </MenuSection>
@@ -145,14 +126,7 @@ export default function UnitsDropdown() {
               }}
             >
               <span>km/h</span>
-              {isKilometersPerHour && (
-                <Image
-                  src="/images/icon-checkmark.svg"
-                  alt="Checkmark icon."
-                  width={14}
-                  height={11}
-                />
-              )}
+              {isKilometersPerHour && <CheckmarkIcon />}
             </button>
           </MenuItem>
           <MenuItem>
@@ -167,14 +141,7 @@ export default function UnitsDropdown() {
               }}
             >
               <span>mph</span>
-              {!isKilometersPerHour && (
-                <Image
-                  src="/images/icon-checkmark.svg"
-                  alt="Checkmark icon."
-                  width={14}
-                  height={11}
-                />
-              )}
+              {!isKilometersPerHour && <CheckmarkIcon />}
             </button>
           </MenuItem>
         </MenuSection>
@@ -200,14 +167,7 @@ export default function UnitsDropdown() {
               }}
             >
               <span>Millimeters (mm)</span>
-              {isMillimeters && (
-                <Image
-                  src="/images/icon-checkmark.svg"
-                  alt="Checkmark icon."
-                  width={14}
-                  height={11}
-                />
-              )}
+              {isMillimeters && <CheckmarkIcon />}
             </button>
           </MenuItem>
           <MenuItem>
@@ -222,14 +182,7 @@ export default function UnitsDropdown() {
               }}
             >
               <span>Inches (in)</span>
-              {!isMillimeters && (
-                <Image
-                  src="/images/icon-checkmark.svg"
-                  alt="Checkmark icon."
-                  width={14}
-                  height={11}
-                />
-              )}
+              {!isMillimeters && <CheckmarkIcon />}
             </button>
           </MenuItem>
         </MenuSection>

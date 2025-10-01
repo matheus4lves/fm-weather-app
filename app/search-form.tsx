@@ -2,13 +2,13 @@
 
 import { useFormStatus } from "react-dom";
 import Form from "next/form";
-import Image from "next/image";
 
 // Fonts
 import { dmSans } from "./fonts";
 
 // Components
 import SearchInProgress from "./search-in-progress";
+import MagnifyingGlassIcon from "./magnifying-glass-icon";
 
 export default function SearchForm() {
   const status = useFormStatus();
@@ -25,13 +25,7 @@ export default function SearchForm() {
           name="name"
           placeholder="Search for a place..."
         />
-        <Image
-          className="w-250 h-250 absolute top-1/2 transform -translate-y-1/2 left-6"
-          src="/images/icon-search.svg"
-          alt="Magnifying glass icon."
-          width={21}
-          height={21}
-        />
+        <MagnifyingGlassIcon className="w-250 h-250 absolute top-1/2 transform -translate-y-1/2 left-6" />
         {status.pending && <SearchInProgress />}
       </div>
       <button
