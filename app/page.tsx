@@ -1,36 +1,10 @@
-// External libraries
-import axios from "axios";
-
 // Fonts
 import { bricolageGrotesque } from "./fonts";
 
 // Components
 import SearchForm from "./search-form";
-import NoSearchResult from "./no-search-result";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  let cities;
-
-  try {
-    const params = await searchParams;
-
-    const response = await axios.get(
-      `https://geocoding-api.open-meteo.com/v1/search`,
-      {
-        params,
-      },
-    );
-
-    // `cities` is either `undefined` or a non-empty array of city objects
-    cities = response.data.results;
-  } catch (error) {
-    console.error(error);
-  }
-
+export default async function Page() {
   return (
     <>
       <h1
@@ -39,7 +13,6 @@ export default async function Page({
         How&apos;s the sky looking today?
       </h1>
       <SearchForm />
-      {!cities && <NoSearchResult />}
     </>
   );
 }
