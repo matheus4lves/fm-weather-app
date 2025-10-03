@@ -29,6 +29,7 @@ export default function SearchForm() {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState<Cities>();
   const [isVisible, setIsVisible] = useState(true);
+  const [submitted, setSubmitted] = useState(false);
   const status = useFormStatus();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -44,6 +45,7 @@ export default function SearchForm() {
       // See: https://open-meteo.com/en/docs/geocoding-api#api_documentation
       setResult(response.data.results);
       setIsVisible(true);
+      setSubmitted(true);
     } catch (error) {
       console.error(error);
     }
@@ -83,7 +85,7 @@ export default function SearchForm() {
       >
         Search
       </button>
-      {!result && <NoSearchResult />}
+      {submitted && !result && <NoSearchResult />}
     </form>
   );
 }
