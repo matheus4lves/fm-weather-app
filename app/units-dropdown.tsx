@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // External libraries
 import clsx from "clsx";
@@ -24,7 +24,7 @@ import CheckmarkIcon from "./checkmark-icon";
 
 export default function UnitsDropdown() {
   const [isCelsius, setIsCelsius] = useState(true);
-  const [isKilometersPerHour, setIsKilometersPerHour] = useState(true);
+  const [isKmh, setIsKmh] = useState(true);
   const [isMillimeters, setIsMillimeters] = useState(true);
   const [isMetric, setIsMetric] = useState(true);
 
@@ -32,15 +32,23 @@ export default function UnitsDropdown() {
     if (isMetric) {
       setIsMetric(false);
       setIsCelsius(false);
-      setIsKilometersPerHour(false);
+      setIsKmh(false);
       setIsMillimeters(false);
     } else {
       setIsMetric(true);
       setIsCelsius(true);
-      setIsKilometersPerHour(true);
+      setIsKmh(true);
       setIsMillimeters(true);
     }
   }
+
+  useEffect(() => {
+    if (isCelsius && isKmh && isMillimeters) {
+      setIsMetric(true);
+    } else if (!isCelsius && !isKmh && !isMillimeters) {
+      setIsMetric(false);
+    }
+  }, [isCelsius, isKmh, isMillimeters]);
 
   return (
     <Menu>
@@ -60,7 +68,7 @@ export default function UnitsDropdown() {
         <MenuItem>
           <button
             className="px-100 py-125 mb-050 rounded-8 w-full text-start hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1"
-            onClick={() => toggleMeasurementSystem()}
+            onClick={toggleMeasurementSystem}
           >
             {isMetric ? "Switch to Imperial" : "Switch to Metric"}
           </button>
@@ -80,6 +88,7 @@ export default function UnitsDropdown() {
                 isCelsius && "bg-neutral-700",
               )}
               onClick={event => {
+                // Prevent collapsing the dropdown
                 event.preventDefault();
                 setIsCelsius(true);
               }}
@@ -118,30 +127,30 @@ export default function UnitsDropdown() {
             <button
               className={clsx(
                 "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
-                isKilometersPerHour && "bg-neutral-700",
+                isKmh && "bg-neutral-700",
               )}
               onClick={event => {
                 event.preventDefault();
-                setIsKilometersPerHour(true);
+                setIsKmh(true);
               }}
             >
               <span>km/h</span>
-              {isKilometersPerHour && <CheckmarkIcon />}
+              {isKmh && <CheckmarkIcon />}
             </button>
           </MenuItem>
           <MenuItem>
             <button
               className={clsx(
                 "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
-                !isKilometersPerHour && "bg-neutral-700",
+                !isKmh && "bg-neutral-700",
               )}
               onClick={event => {
                 event.preventDefault();
-                setIsKilometersPerHour(false);
+                setIsKmh(false);
               }}
             >
               <span>mph</span>
-              {!isKilometersPerHour && <CheckmarkIcon />}
+              {!isKmh && <CheckmarkIcon />}
             </button>
           </MenuItem>
         </MenuSection>
