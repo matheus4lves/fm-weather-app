@@ -47,12 +47,12 @@ export default function SearchResult({
     >
       {cities.map(city => (
         <li
-          className="px-2 py-2.5 rounded-8 hover:bg-neutral-700 border border-neutral-800 hover:border-neutral-600"
+          className="rounded-8 hover:bg-neutral-700 border border-neutral-800 hover:border-neutral-600 "
           key={city.id}
         >
           <Link
             onClick={handleClick}
-            className={`${dmSans.className} text-preset-7 text-neutral-0`}
+            className={`block px-2 py-2.5 ${dmSans.className} text-preset-7 text-neutral-0 `}
             href={`/?latitude=${city.latitude}&longitude=${city.longitude}`}
           >
             {/* TODO: Add country flag */}
