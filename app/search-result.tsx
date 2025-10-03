@@ -5,7 +5,7 @@ import clsx from "clsx";
 
 // Fonts
 import { dmSans } from "./fonts";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, RefObject, SetStateAction } from "react";
 
 type SearchResultProps = {
   cities: {
@@ -20,6 +20,7 @@ type SearchResultProps = {
   isVisible: boolean;
   setQuery: Dispatch<SetStateAction<string>>;
   setIsVisible: Dispatch<SetStateAction<boolean>>;
+  inputRef: RefObject<HTMLInputElement | null>;
 };
 
 export default function SearchResult({
@@ -27,7 +28,16 @@ export default function SearchResult({
   isVisible,
   setIsVisible,
   setQuery,
+  inputRef,
 }: SearchResultProps) {
+  function handleClick() {
+    setIsVisible(false);
+    setQuery("");
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }
+
   return (
     <ul
       className={clsx(
@@ -41,10 +51,7 @@ export default function SearchResult({
           key={city.id}
         >
           <Link
-            onClick={() => {
-              setIsVisible(false);
-              setQuery("");
-            }}
+            onClick={handleClick}
             className={`${dmSans.className} text-preset-7 text-neutral-0`}
             href={`/?latitude=${city.latitude}&longitude=${city.longitude}`}
           >

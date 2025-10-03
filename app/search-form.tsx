@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useRef } from "react";
 import { useFormStatus } from "react-dom";
 
 // External libraries
@@ -29,8 +29,8 @@ export default function SearchForm() {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState<Cities>();
   const [isVisible, setIsVisible] = useState(true);
-
   const status = useFormStatus();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -63,6 +63,7 @@ export default function SearchForm() {
           name="name"
           value={query}
           placeholder="Search for a place..."
+          ref={inputRef}
         />
         <MagnifyingGlassIcon className="w-250 h-250 absolute top-1/2 transform -translate-y-1/2 left-6" />
         {status.pending && <SearchInProgress />}
@@ -72,6 +73,7 @@ export default function SearchForm() {
             setQuery={setQuery}
             isVisible={isVisible}
             setIsVisible={setIsVisible}
+            inputRef={inputRef}
           />
         )}
       </div>
