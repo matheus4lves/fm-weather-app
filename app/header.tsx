@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 
 // Components
@@ -10,7 +11,9 @@ export default function Header() {
       <Link href="/">
         <Logo className="w-auto h-7 md:h-10" />
       </Link>
-      <UnitsDropdown />
+      <Suspense fallback={null}>
+        <UnitsDropdown />
+      </Suspense>
     </header>
   );
 }
