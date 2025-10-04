@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 // External libraries
 import clsx from "clsx";
@@ -28,17 +29,58 @@ export default function UnitsDropdown() {
   const [isMillimeters, setIsMillimeters] = useState(true);
   const [isMetric, setIsMetric] = useState(true);
 
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const createQueryString = useCallback(
+    (...params: { name: string; value: string }[]) => {
+      const urlSearchParams = new URLSearchParams(searchParams.toString());
+
+      for (const param of params) {
+        urlSearchParams.set(param.name, param.value);
+      }
+
+      return urlSearchParams.toString();
+    },
+    [searchParams],
+  );
+
   function toggleMeasurementSystem() {
     if (isMetric) {
       setIsMetric(false);
       setIsCelsius(false);
       setIsKmh(false);
       setIsMillimeters(false);
+      router.push(
+        pathname +
+          "?" +
+          createQueryString(
+            {
+              name: "temperature_unit",
+              value: "fahrenheit",
+            },
+            { name: "wind_speed_unit", value: "mph" },
+            { name: "precipitation_unit", value: "inch" },
+          ),
+      );
     } else {
       setIsMetric(true);
       setIsCelsius(true);
       setIsKmh(true);
       setIsMillimeters(true);
+      router.push(
+        pathname +
+          "?" +
+          createQueryString(
+            {
+              name: "temperature_unit",
+              value: "celsius",
+            },
+            { name: "wind_speed_unit", value: "kmh" },
+            { name: "precipitation_unit", value: "mm" },
+          ),
+      );
     }
   }
 
@@ -88,9 +130,18 @@ export default function UnitsDropdown() {
                 isCelsius && "bg-neutral-700",
               )}
               onClick={event => {
-                // Prevent collapsing the dropdown
                 event.preventDefault();
-                setIsCelsius(true);
+                if (!isCelsius) {
+                  setIsCelsius(true);
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString({
+                        name: "temperature_unit",
+                        value: "celsius",
+                      }),
+                  );
+                }
               }}
             >
               <span>Celsius (&deg;C)</span>
@@ -105,7 +156,17 @@ export default function UnitsDropdown() {
               )}
               onClick={event => {
                 event.preventDefault();
-                setIsCelsius(false);
+                if (isCelsius) {
+                  setIsCelsius(false);
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString({
+                        name: "temperature_unit",
+                        value: "fahrenheit",
+                      }),
+                  );
+                }
               }}
             >
               <span>Fahrenheit (&deg;F)</span>
@@ -131,7 +192,17 @@ export default function UnitsDropdown() {
               )}
               onClick={event => {
                 event.preventDefault();
-                setIsKmh(true);
+                if (!isKmh) {
+                  setIsKmh(true);
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString({
+                        name: "wind_speed_unit",
+                        value: "kmh",
+                      }),
+                  );
+                }
               }}
             >
               <span>km/h</span>
@@ -146,7 +217,17 @@ export default function UnitsDropdown() {
               )}
               onClick={event => {
                 event.preventDefault();
-                setIsKmh(false);
+                if (isKmh) {
+                  setIsKmh(false);
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString({
+                        name: "wind_speed_unit",
+                        value: "mph",
+                      }),
+                  );
+                }
               }}
             >
               <span>mph</span>
@@ -172,7 +253,17 @@ export default function UnitsDropdown() {
               )}
               onClick={event => {
                 event.preventDefault();
-                setIsMillimeters(true);
+                if (!isMillimeters) {
+                  setIsMillimeters(true);
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString({
+                        name: "precipitation_unit",
+                        value: "mm",
+                      }),
+                  );
+                }
               }}
             >
               <span>Millimeters (mm)</span>
@@ -187,7 +278,17 @@ export default function UnitsDropdown() {
               )}
               onClick={event => {
                 event.preventDefault();
-                setIsMillimeters(false);
+                if (isMillimeters) {
+                  setIsMillimeters(false);
+                  router.push(
+                    pathname +
+                      "?" +
+                      createQueryString({
+                        name: "precipitation_unit",
+                        value: "inch",
+                      }),
+                  );
+                }
               }}
             >
               <span>Inches (in)</span>

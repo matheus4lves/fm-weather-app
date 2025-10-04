@@ -1,10 +1,27 @@
+// External libraries
+import axios from "axios";
+
 // Fonts
 import { bricolageGrotesque } from "./fonts";
 
 // Components
 import SearchForm from "./search-form";
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  try {
+    const params = await searchParams;
+    const { data } = await axios.get(`https://api.open-meteo.com/v1/forecast`, {
+      params,
+    });
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+
   return (
     <>
       <h1
