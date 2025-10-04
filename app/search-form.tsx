@@ -37,13 +37,15 @@ export default function SearchForm() {
     event.preventDefault();
 
     try {
-      const response = await axios.get(
+      const {
+        data: { results },
+      } = await axios.get(
         `https://geocoding-api.open-meteo.com/v1/search?name=${query}`,
       );
 
-      // `response.data.results` is either a non-empty array or undefined
+      // `results` is either a non-empty array or undefined
       // See: https://open-meteo.com/en/docs/geocoding-api#api_documentation
-      setResult(response.data.results);
+      setResult(results);
       setIsVisible(true);
       setSubmitted(true);
     } catch (error) {
