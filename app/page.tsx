@@ -2,7 +2,7 @@
 import axios from "axios";
 
 // Fonts
-import { bricolageGrotesque } from "../ui/fonts";
+import { bricolageGrotesque } from "@/ui/fonts";
 
 // Components
 import SearchForm from "@/ui/components/search-form";

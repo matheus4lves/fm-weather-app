@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import "../globals.css";
+import "./globals.css";
 import Header from "@/ui/components/header";
-import { dmSans } from "../ui/fonts";
+import { dmSans } from "./ui/fonts";
 
 export const metadata: Metadata = {
   title: "Frontend Mentor | Weather app",
