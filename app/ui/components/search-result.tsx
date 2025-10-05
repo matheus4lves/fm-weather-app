@@ -63,7 +63,7 @@ export default function SearchResult({
             >
               {/* TODO: Add country flag */}
               <span>
-                {city.name}, {city.admin1}
+                {city.name + `${city.admin1 ? ", " + city.admin1 : ""}`}
               </span>
             </Link>
           </li>
