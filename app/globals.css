@@ -1,2 +1,3 @@
 @import "tailwindcss";
-@import "./design-system.css";
+@import "./ui/styles/theme-variables.css";
+@import "./ui/styles/text-presets.css";

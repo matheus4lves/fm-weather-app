@@ -1,4 +1,4 @@
-import { dmSans } from "./fonts";
+import { dmSans } from "../fonts";
 
 export default function NoSearchResult() {
   return (

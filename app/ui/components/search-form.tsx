@@ -7,11 +7,11 @@ import { useFormStatus } from "react-dom";
 import axios from "axios";
 
 // Fonts
-import { dmSans } from "./fonts";
+import { dmSans } from "../fonts";
 
 // Components
 import SearchInProgress from "./search-in-progress";
-import MagnifyingGlassIcon from "./magnifying-glass-icon";
+import MagnifyingGlassIcon from "./icons/magnifying-glass-icon";
 import SearchResult from "./search-result";
 import NoSearchResult from "./no-search-result";
 

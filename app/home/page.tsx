@@ -2,10 +2,10 @@
 import axios from "axios";
 
 // Fonts
-import { bricolageGrotesque } from "./fonts";
+import { bricolageGrotesque } from "../ui/fonts";
 
 // Components
-import SearchForm from "./search-form";
+import SearchForm from "@/ui/components/search-form";
 
 export default async function Page({
   searchParams,

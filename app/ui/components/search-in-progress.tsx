@@ -1,8 +1,8 @@
 // Fonts
-import { dmSans } from "./fonts";
+import { dmSans } from "../fonts";
 
 // Components
-import LoadingIcon from "./loading-icon";
+import LoadingIcon from "./icons/loading-icon";
 
 export default function SearchInProgress() {
   return (

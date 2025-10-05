@@ -1,0 +1,55 @@
+@layer components {
+  /* Use with DM Sans semibold italic */
+  .text-preset-1 {
+    font-size: 96px;
+    line-height: 100%;
+    letter-spacing: -2px;
+  }
+
+  /* Use with Bricolage Grotesque bold */
+  .text-preset-2 {
+    font-size: 52px;
+    line-height: 120%;
+    letter-spacing: 0;
+  }
+
+  /* Use with DM Sans light */
+  .text-preset-3 {
+    font-size: 32px;
+    line-height: 100%;
+    letter-spacing: 0;
+  }
+
+  /* Use with DM Sans bold */
+  .text-preset-4 {
+    font-size: 28px;
+    line-height: 120%;
+    letter-spacing: 0;
+  }
+
+  /* Use with DM Sans semibold and medium */
+  .text-preset-5 {
+    font-size: 20px;
+    line-height: 120%;
+    letter-spacing: 0;
+  }
+
+  /* Use with DM Sans medium */
+  .text-preset-6 {
+    font-size: 18px;
+    line-height: 120%;
+    letter-spacing: 0;
+  }
+
+  .text-preset-7 {
+    font-size: 16px;
+    line-height: 120%;
+    letter-spacing: 0;
+  }
+
+  .text-preset-8 {
+    font-size: 14px;
+    line-height: 120%;
+    letter-spacing: 0;
+  }
+}

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import clsx from "clsx";
 
 // Fonts
-import { dmSans } from "./fonts";
+import { dmSans } from "../fonts";
 import { Dispatch, RefObject, SetStateAction } from "react";
 
 type SearchResultProps = {

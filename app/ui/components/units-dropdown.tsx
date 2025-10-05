@@ -16,12 +16,12 @@ import {
 } from "@headlessui/react";
 
 // Fonts
-import { dmSans } from "./fonts";
+import { dmSans } from "../fonts";
 
 // Components
-import GearIcon from "./gear-icon";
-import DropdownIcon from "./dropdown-icon";
-import CheckmarkIcon from "./checkmark-icon";
+import GearIcon from "./icons/gear-icon";
+import DropdownIcon from "./icons/dropdown-icon";
+import CheckmarkIcon from "./icons/checkmark-icon";
 
 export default function UnitsDropdown() {
   const [isCelsius, setIsCelsius] = useState(true);
