@@ -6,23 +6,10 @@ import clsx from "clsx";
 
 // Fonts
 import { dmSans } from "../fonts";
-import { Dispatch, RefObject, SetStateAction } from "react";
 
-type SearchResultProps = {
-  cities: {
-    admin1: string;
-    country: string;
-    country_code: string;
-    id: number;
-    latitude: number;
-    longitude: number;
-    name: string;
-  }[];
-  isVisible: boolean;
-  setQuery: Dispatch<SetStateAction<string>>;
-  setIsVisible: Dispatch<SetStateAction<boolean>>;
-  inputRef: RefObject<HTMLInputElement | null>;
-};
+// Types
+import { SearchResultProps } from "@/types";
+import { City } from "@/types";
 
 export default function SearchResult({
   cities,

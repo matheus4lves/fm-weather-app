@@ -15,20 +15,13 @@ import MagnifyingGlassIcon from "./icons/magnifying-glass-icon";
 import SearchResult from "./search-result";
 import NoSearchResult from "./no-search-result";
 
-type Cities = {
-  admin1: string;
-  country: string;
-  country_code: string;
-  id: number;
-  latitude: number;
-  longitude: number;
-  name: string;
-}[];
+// Types
+import { City } from "@/types";
 
 export default function SearchForm() {
-  const [query, setQuery] = useState("");
-  const [result, setResult] = useState<Cities>();
   const [isVisible, setIsVisible] = useState(true);
+  const [query, setQuery] = useState("");
+  const [result, setResult] = useState<City[]>();
   const [submitted, setSubmitted] = useState(false);
   const status = useFormStatus();
   const inputRef = useRef<HTMLInputElement>(null);
