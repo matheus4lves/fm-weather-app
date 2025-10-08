@@ -19,12 +19,12 @@ import NoSearchResult from "./no-search-result";
 import { City } from "@/types";
 
 export default function SearchForm() {
+  const inputRef = useRef<HTMLInputElement>(null);
+  const status = useFormStatus();
   const [isVisible, setIsVisible] = useState(true);
   const [query, setQuery] = useState("");
-  const [result, setResult] = useState<City[]>();
+  const [result, setResult] = useState<Cities>();
   const [submitted, setSubmitted] = useState(false);
-  const status = useFormStatus();
-  const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -79,10 +79,10 @@ export default function SearchForm() {
         {result && (
           <SearchResult
             cities={result}
-            setQuery={setQuery}
+            inputRef={inputRef}
             isVisible={isVisible}
             setIsVisible={setIsVisible}
-            inputRef={inputRef}
+            setQuery={setQuery}
           />
         )}
       </div>

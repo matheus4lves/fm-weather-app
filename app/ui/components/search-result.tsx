@@ -13,10 +13,10 @@ import { City } from "@/types";
 
 export default function SearchResult({
   cities,
+  inputRef,
   isVisible,
   setIsVisible,
   setQuery,
-  inputRef,
 }: SearchResultProps) {
   function handleClick() {
     setIsVisible(false);
