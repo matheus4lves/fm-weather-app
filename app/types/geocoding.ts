@@ -6,4 +6,6 @@ export interface City {
   latitude: number;
   longitude: number;
   name: string;
+  countryFlagURL?: string;
+  countryFlagAlt?: string;
 }
