@@ -51,7 +51,7 @@ export default function SearchForm({
 
         const {
           flags: { svg, alt },
-        } = data[0];
+        } = data;
 
         return { ...city, countryFlagURL: svg, countryFlagAlt: alt };
       });
