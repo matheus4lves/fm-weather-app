@@ -21,24 +21,38 @@ import { City } from "@/types";
 export default function SearchForm() {
   const inputRef = useRef<HTMLInputElement>(null);
   const status = useFormStatus();
+  const [cities, setCities] = useState<City[]>();
   const [isVisible, setIsVisible] = useState(true);
   const [query, setQuery] = useState("");
-  const [result, setResult] = useState<Cities>();
   const [submitted, setSubmitted] = useState(false);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
+      // Get cities
       const {
-        data: { results },
+        // `results` is either a non-empty array or undefined
+        // See: https://open-meteo.com/en/docs/geocoding-api#api_documentation
+        data: { results: cities },
       } = await axios.get(
         `https://geocoding-api.open-meteo.com/v1/search?name=${query}`,
       );
 
-      // `results` is either a non-empty array or undefined
-      // See: https://open-meteo.com/en/docs/geocoding-api#api_documentation
-      setResult(results);
+      // Add the flag of the city's country
+      const citiesWithCountriesFlags = cities.map(async (city: City) => {
+        const { data } = await axios.get(
+          `https://restcountries.com/v3.1/alpha/${city.country_code}?fields=flags`,
+        );
+
+        const {
+          flags: { svg, alt },
+        } = data[0];
+
+        return { ...city, countryFlagURL: svg, countryFlagAlt: alt };
+      });
+
+      setCities(await Promise.all(citiesWithCountriesFlags));
       setIsVisible(true);
       setSubmitted(true);
     } catch (error) {
@@ -76,9 +90,9 @@ export default function SearchForm() {
         />
         <MagnifyingGlassIcon className="w-250 h-250 absolute top-1/2 transform -translate-y-1/2 left-6" />
         {status.pending && <SearchInProgress />}
-        {result && (
+        {cities && (
           <SearchResult
-            cities={result}
+            cities={cities}
             inputRef={inputRef}
             isVisible={isVisible}
             setIsVisible={setIsVisible}
@@ -92,7 +106,7 @@ export default function SearchForm() {
       >
         Search
       </button>
-      {submitted && !result && <NoSearchResult />}
+      {submitted && !cities && <NoSearchResult />}
     </form>
   );
 }
