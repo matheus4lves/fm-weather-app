@@ -16,10 +16,12 @@ export default function SearchResult({
   cities,
   inputRef,
   isVisible,
+  setSelectedCity,
   setIsVisible,
   setQuery,
 }: SearchResultProps) {
-  function handleClick() {
+  function handleClick(city: City) {
+    setSelectedCity(city);
     setIsVisible(false);
     setQuery("");
     if (inputRef.current) {

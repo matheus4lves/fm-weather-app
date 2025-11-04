@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState, useRef } from "react";
+import { Dispatch, FormEvent, SetStateAction, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 
 // External libraries
@@ -18,7 +18,11 @@ import NoSearchResult from "./no-search-result";
 // Types
 import { City } from "@/types";
 
-export default function SearchForm() {
+export default function SearchForm({
+  setSelectedCity,
+}: {
+  setSelectedCity: Dispatch<SetStateAction<City | undefined>>;
+}) {
   const inputRef = useRef<HTMLInputElement>(null);
   const status = useFormStatus();
   const [cities, setCities] = useState<City[]>();
@@ -97,6 +101,7 @@ export default function SearchForm() {
             isVisible={isVisible}
             setIsVisible={setIsVisible}
             setQuery={setQuery}
+            setSelectedCity={setSelectedCity}
           />
         )}
       </div>

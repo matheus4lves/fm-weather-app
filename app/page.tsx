@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useEffect } from "react";
 // External libraries
 import axios from "axios";
 
@@ -6,6 +9,7 @@ import { bricolageGrotesque } from "@/ui/fonts";
 
 // Components
 import SearchForm from "@/ui/components/search-form";
+  const [selectedCity, setSelectedCity] = useState<City>();
 
 export default async function Page({
   searchParams,
@@ -29,7 +33,9 @@ export default async function Page({
       >
         How&apos;s the sky looking today?
       </h1>
-      <SearchForm />
+      <main>
+        <SearchForm setSelectedCity={setSelectedCity} />
+      </main>
     </>
   );
 }
