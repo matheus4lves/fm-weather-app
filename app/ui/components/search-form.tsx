@@ -80,7 +80,7 @@ export default function SearchForm({
     <form
       onSubmit={event => handleSubmit(event)}
       action=""
-      className="relative flex flex-col gap-3 md:flex-row md:gap-4 lg:w-164 lg:m-auto mb-600"
+      className="relative flex flex-col gap-3 md:flex-row md:gap-4 lg:w-164 lg:mx-auto mb-600"
     >
       <div className="grow relative">
         <input
