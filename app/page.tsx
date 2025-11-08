@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+
 // External libraries
 import axios from "axios";
 
@@ -9,22 +11,56 @@ import { bricolageGrotesque } from "@/ui/fonts";
 
 // Components
 import SearchForm from "@/ui/components/search-form";
-  const [selectedCity, setSelectedCity] = useState<City>();
+import CurrentWeather from "@/ui/components/current-weather";
 
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}) {
-  try {
-    const params = await searchParams;
-    const { data } = await axios.get(`https://api.open-meteo.com/v1/forecast`, {
-      params,
-    });
-    console.log(data);
-  } catch (error) {
-    console.error(error);
-  }
+// Types
+import { City, WeatherApiSuccess } from "./types";
+
+export default function Page() {
+  const [selectedCity, setSelectedCity] = useState<City>();
+  const [weatherData, setWeatherData] = useState<WeatherApiSuccess>();
+
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const controller = new AbortController(); // Cancels request on component unmount
+    const timeoutSignal = AbortSignal.timeout(5000); // Cancels request on timeout
+    const combinedSignal = AbortSignal.any([controller.signal, timeoutSignal]);
+
+    async function getWeatherData() {
+      try {
+        // Data is either of type WeatherApiSuccess (response.data) or
+        // WeatherApiError (error.response.data)
+        const { data } = await axios.get(
+          `https://api.open-meteo.com/v1/forecast`,
+          {
+            params: searchParams,
+            signal: combinedSignal,
+          },
+        );
+
+        setWeatherData(data);
+      } catch (error) {
+        // See https://axios-http.com/docs/handling_errors
+        if (axios.isAxiosError(error)) {
+          if (error.response) {
+            console.log(error.response.data);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        }
+      }
+    }
+
+    getWeatherData();
+
+    return () => controller.abort();
+  }, [searchParams]);
 
   return (
     <>
@@ -35,6 +71,13 @@ export default async function Page({
       </h1>
       <main>
         <SearchForm setSelectedCity={setSelectedCity} />
+        {selectedCity && weatherData && (
+          <CurrentWeather
+            selectedCity={selectedCity}
+            current={weatherData.current!}
+            currentUnits={weatherData.current_units!}
+          />
+        )}
       </main>
     </>
   );
