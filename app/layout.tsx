@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/ui/components/header";
@@ -19,7 +20,7 @@ export default function RootLayout({
         className={`bg-neutral-900 pt-200 px-200 pb-600 h-screen ${dmSans.className}`}
       >
         <Header />
-        {children}
+        <Suspense fallback={null}>{children}</Suspense>
       </body>
     </html>
   );
