@@ -1,6 +1,9 @@
 import Image from "next/image";
 import { getImageProps } from "next/image";
 
+// External libraries
+import { format } from "date-fns";
+
 // Fonts
 import { dmSans, dmSansItalic600 } from "../fonts";
 
@@ -12,9 +15,9 @@ export default function CurrentWeather({
   current,
   currentUnits,
 }: {
-  selectedCity: City | undefined;
-  current: CurrentWeatherData | undefined;
-  currentUnits: CurrentWeatherUnits | undefined;
+  selectedCity: City;
+  current: CurrentWeatherData;
+  currentUnits: CurrentWeatherUnits;
 }) {
   const common = {
     alt: "An illustration of a night sky with some clouds and stars.",
@@ -33,6 +36,9 @@ export default function CurrentWeather({
     width: 800,
     height: 286,
   });
+
+  const date = new Date(current.time);
+  const formattedDate = format(date, "EEEE, MMM d, yyyy");
 
   return (
     <section className="flex flex-col gap-5">
@@ -57,7 +63,7 @@ export default function CurrentWeather({
             <p
               className={`${dmSans.className} font-medium text-preset-6 text-neutral-0 opacity-80 text-center`}
             >
-              Tuesday, Aug 5, 2025
+              {formattedDate}
             </p>
           </div>
           <div className="flex items-center gap-5">
