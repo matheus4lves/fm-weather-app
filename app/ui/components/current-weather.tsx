@@ -47,10 +47,12 @@ export default function CurrentWeather({
         {/* See https://nextjs.org/docs/app/api-reference/components/image#background-image */}
         <Image
           {...phoneProps}
+          alt={common.alt}
           className="w-full h-full object-cover object-center md:hidden"
         />
         <Image
           {...tabletAndDesktopProps}
+          alt={common.alt}
           className="w-full h-full object-cover object-center hidden md:block"
         />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full flex flex-col md:flex-row md:justify-between md:px-300 items-center gap-4">
