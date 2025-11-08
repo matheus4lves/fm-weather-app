@@ -58,7 +58,7 @@ export default function CurrentWeather({
             <p
               className={`${dmSans.className} font-bold text-preset-4 text-neutral-0 text-center mb-150`}
             >
-              Berlin, Germany
+              {selectedCity.name}, {selectedCity.country}
             </p>
             <p
               className={`${dmSans.className} font-medium text-preset-6 text-neutral-0 opacity-80 text-center`}
@@ -77,7 +77,7 @@ export default function CurrentWeather({
             <span
               className={`${dmSansItalic600.className} text-preset-1 text-neutral-0`}
             >
-              68&deg;
+              {current.temperature_2m}&deg;
             </span>
           </div>
         </div>
@@ -94,7 +94,7 @@ export default function CurrentWeather({
           <p
             className={`${dmSans.className} text-preset-3 font-light text-neutral-0`}
           >
-            64&deg;
+            {current.apparent_temperature}&deg;
           </p>
         </div>
         {/* Humidity */}
@@ -107,7 +107,7 @@ export default function CurrentWeather({
           <p
             className={`${dmSans.className} text-preset-3 font-light text-neutral-0`}
           >
-            46%
+            {current.relative_humidity_2m}%
           </p>
         </div>
         {/* Wind */}
@@ -120,7 +120,7 @@ export default function CurrentWeather({
           <p
             className={`${dmSans.className} text-preset-3 font-light text-neutral-0`}
           >
-            9 mph
+            {current.wind_speed_10m} {currentUnits.wind_speed_10m}
           </p>
         </div>
         {/* Precipitation */}
@@ -133,7 +133,7 @@ export default function CurrentWeather({
           <p
             className={`${dmSans.className} text-preset-3 font-light text-neutral-0`}
           >
-            0 in
+            {current.precipitation} {currentUnits.precipitation}
           </p>
         </div>
       </div>
