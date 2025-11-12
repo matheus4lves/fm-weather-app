@@ -12,6 +12,7 @@ import { bricolageGrotesque } from "@/ui/fonts";
 // Components
 import SearchForm from "@/ui/components/search-form";
 import CurrentWeather from "@/ui/components/current-weather";
+import DailyForecast from "./ui/components/daily-forecast";
 
 // Types
 import { City, WeatherApiSuccess } from "./types";
@@ -39,6 +40,7 @@ export default function Page() {
           },
         );
 
+        console.log(data);
         setWeatherData(data);
       } catch (error) {
         // See https://axios-http.com/docs/handling_errors
@@ -72,11 +74,14 @@ export default function Page() {
       <main>
         <SearchForm setSelectedCity={setSelectedCity} />
         {selectedCity && weatherData && (
-          <CurrentWeather
-            selectedCity={selectedCity}
-            current={weatherData.current!}
-            currentUnits={weatherData.current_units!}
-          />
+          <>
+            <CurrentWeather
+              selectedCity={selectedCity}
+              current={weatherData.current!}
+              currentUnits={weatherData.current_units!}
+            />
+            <DailyForecast />
+          </>
         )}
       </main>
     </>

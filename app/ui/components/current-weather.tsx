@@ -41,7 +41,7 @@ export default function CurrentWeather({
   const formattedDate = format(date, "EEEE, MMM d, yyyy");
 
   return (
-    <section className="flex flex-col gap-5">
+    <section className="flex flex-col gap-5 mb-400 lg:mb-600">
       {/* Temperature */}
       <div className="relative h-[286px] rounded-20 overflow-hidden">
         {/* See https://nextjs.org/docs/app/api-reference/components/image#background-image */}
