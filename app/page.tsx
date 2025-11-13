@@ -40,7 +40,7 @@ export default function Page() {
           },
         );
 
-        console.log(data);
+        console.log("Weather data:", data);
         setWeatherData(data);
       } catch (error) {
         // See https://axios-http.com/docs/handling_errors
@@ -80,7 +80,7 @@ export default function Page() {
               current={weatherData.current!}
               currentUnits={weatherData.current_units!}
             />
-            <DailyForecast />
+            <DailyForecast daily={weatherData.daily!} />
           </>
         )}
       </main>

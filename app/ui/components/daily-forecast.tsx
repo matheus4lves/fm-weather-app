@@ -1,53 +1,27 @@
 import Image from "next/image";
+import { getWeatherIconSrc } from "@/lib/weather";
+
+// External libraries
+import { format } from "date-fns";
 
 // Fonts
 import { dmSans } from "../fonts";
 
-export default function DailyForecast() {
-  const dailyForecast = [
-    {
-      day: "Tue",
-      src: "/images/icon-rain.webp",
-      maxTemperature: 68,
-      minTemperature: 57,
-    },
-    {
-      day: "Wed",
-      src: "/images/icon-drizzle.webp",
-      maxTemperature: 70,
-      minTemperature: 69,
-    },
-    {
-      day: "Thu",
-      src: "/images/icon-sunny.webp",
-      maxTemperature: 75,
-      minTemperature: 57,
-    },
-    {
-      day: "Fri",
-      src: "/images/icon-partly-cloudy.webp",
-      maxTemperature: 77,
-      minTemperature: 55,
-    },
-    {
-      day: "Sat",
-      src: "/images/icon-storm.webp",
-      maxTemperature: 68,
-      minTemperature: 57,
-    },
-    {
-      day: "Sun",
-      src: "/images/icon-snow.webp",
-      maxTemperature: 77,
-      minTemperature: 61,
-    },
-    {
-      day: "Mon",
-      src: "/images/icon-rain.webp",
-      maxTemperature: 75,
-      minTemperature: 59,
-    },
-  ];
+// Types
+import { DailyForecastData } from "@/types";
+
+export default function DailyForecast({ daily }: { daily: DailyForecastData }) {
+  const dailyForecast: {
+    maxTemperature: number;
+    minTemperature: number;
+    weekDay: string;
+    weatherCode: number;
+  }[] = daily.time.map((time, index) => ({
+    weekDay: format(new Date(time), "iii"),
+    maxTemperature: daily.temperature_2m_max[index],
+    minTemperature: daily.temperature_2m_min[index],
+    weatherCode: daily.weather_code[index],
+  }));
 
   return (
     <section>
@@ -66,11 +40,11 @@ export default function DailyForecast() {
             <p
               className={`${dmSans.className} text-preset-6 font-medium text-neutral-0 text-center`}
             >
-              {day.day}
+              {day.weekDay}
             </p>
             <Image
               className="w-[60px] h-[60px] self-center"
-              src={day.src}
+              src={getWeatherIconSrc(day.weatherCode)}
               alt="Rain icon."
               width={320}
               height={320}
