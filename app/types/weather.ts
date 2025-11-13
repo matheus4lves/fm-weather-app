@@ -18,18 +18,21 @@ export interface CurrentWeatherUnits {
   temperature_2m: TemperatureUnit;
   time: "iso8601";
   wind_speed_10m: WindSpeedUnit;
+  weather_code: number;
 }
 
 export interface DailyForecastData {
   temperature_2m_max: number[];
   temperature_2m_min: number[];
   time: string[];
+  weather_code: number[];
 }
 
 export interface DailyForecastUnits {
   temperature_2m_max: TemperatureUnit;
   temperature_2m_min: TemperatureUnit;
   time: "iso8601";
+  weather_code: number[];
 }
 
 export interface HourlyForecastData {
