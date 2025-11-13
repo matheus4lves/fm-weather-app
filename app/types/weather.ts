@@ -9,6 +9,7 @@ export interface CurrentWeatherData {
   temperature_2m: number;
   time: string;
   wind_speed_10m: number;
+  weather_code: number;
 }
 
 export interface CurrentWeatherUnits {
