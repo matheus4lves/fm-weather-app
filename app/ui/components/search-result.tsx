@@ -39,7 +39,7 @@ export default function SearchResult({
       )}
     >
       {cities?.map(city => {
-        const searchParams = `latitude=${city.latitude}&longitude=${city.longitude}&daily=temperature_2m_min%2Ctemperature_2m_max&timezone=auto&hourly=temperature_2m&current=temperature_2m%2Crelative_humidity_2m%2Capparent_temperature%2Cwind_speed_10m%2Cprecipitation&temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=mm`;
+        const searchParams = `latitude=${city.latitude}&longitude=${city.longitude}&daily=weather_code,temperature_2m_max,temperature_2m_min&hourly=temperature_2m,weather_code&current=temperature_2m,weather_code,relative_humidity_2m,apparent_temperature,precipitation,wind_speed_10m&temperature_unit=celsius&wind_speed_unit=kmh&precipitation_unit=mm`;
 
         return (
           <li
