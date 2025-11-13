@@ -9,6 +9,7 @@ export interface CurrentWeatherData {
   temperature_2m: number;
   time: string;
   wind_speed_10m: number;
+  weather_code: number;
 }
 
 export interface CurrentWeatherUnits {
@@ -24,12 +25,14 @@ export interface DailyForecastData {
   temperature_2m_max: number[];
   temperature_2m_min: number[];
   time: string[];
+  weather_code: number[];
 }
 
 export interface DailyForecastUnits {
   temperature_2m_max: TemperatureUnit;
   temperature_2m_min: TemperatureUnit;
   time: "iso8601";
+  weather_code: number[];
 }
 
 export interface HourlyForecastData {
