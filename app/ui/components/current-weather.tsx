@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { getImageProps } from "next/image";
 
+import { getWeatherIconSrc } from "@/lib/weather";
+
 // External libraries
 import { format } from "date-fns";
 
@@ -71,7 +73,7 @@ export default function CurrentWeather({
           <div className="flex items-center gap-5">
             <Image
               className="w-[120] h-[120]"
-              src="/images/icon-sunny.webp"
+              src={getWeatherIconSrc(current.weather_code)}
               alt="Sunny icon."
               width={320}
               height={320}
