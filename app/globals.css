@@ -1,3 +1,4 @@
 @import "tailwindcss";
 @import "./ui/styles/theme-variables.css";
 @import "./ui/styles/text-presets.css";
+@import "./ui/styles/custom-scrollbar.css";

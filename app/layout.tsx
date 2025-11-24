@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-neutral-900 pt-200 px-200 pb-600 h-screen ${dmSans.className}`}
+        className={`bg-neutral-900 pt-200 px-200 pb-600 md:px-300 md:pt-300 md:pb-1000 lg:px-1400 lg:pb-600 ${dmSans.className}`}
       >
         <Header />
         <Suspense fallback={null}>{children}</Suspense>

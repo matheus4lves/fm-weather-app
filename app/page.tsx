@@ -71,17 +71,17 @@ export default function Page() {
       >
         How&apos;s the sky looking today?
       </h1>
-      <main>
+      <main className="max-w-[1216px] lg:mx-auto">
         <SearchForm setSelectedCity={setSelectedCity} />
         {selectedCity && weatherData && (
-          <>
+          <div className="grid grid-cols-1 gap-y-8 xl2:grid-cols-3 xl2:grid-rows-[repeat(2,minmax(0,auto))] xl2:gap-x-8 xl2:gap-y-12">
             <CurrentWeather
               selectedCity={selectedCity}
               current={weatherData.current!}
               currentUnits={weatherData.current_units!}
             />
             <DailyForecast daily={weatherData.daily!} />
-          </>
+          </div>
         )}
       </main>
     </>

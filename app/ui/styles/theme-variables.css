@@ -45,4 +45,7 @@
   --radius-20: 20px;
   --radius-24: 24px;
   --radius-full: 999px;
+
+  /* Breakpoints */
+  --breakpoint-xl2: 90rem;
 }

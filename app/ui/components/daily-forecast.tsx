@@ -24,7 +24,7 @@ export default function DailyForecast({ daily }: { daily: DailyForecastData }) {
   }));
 
   return (
-    <section>
+    <section className="xl2:col-[1/3] xl2:row-[2/3]">
       <h2
         className={`${dmSans.className} text-preset-5 font-semibold text-neutral-0 mb-250`}
       >
