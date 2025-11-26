@@ -24,16 +24,16 @@ export default function DaysDropdown() {
     "Sunday",
   ];
 
-  const [weakDay, setWeekDay] = useState<string>(days[0]);
+  const [weekday, setWeekday] = useState<string>(days[0]);
 
   return (
     // <Select className="flex flex-col gap-1">
 
-    <Listbox value={weakDay} onChange={setWeekDay}>
+    <Listbox value={weekday} onChange={setWeekday}>
       <ListboxButton
         className={`flex gap-3 items-center px-200 py-100 rounded-8 bg-neutral-700 ${dmSans.className} text-preset-7 font-medium text-neutral-0`}
       >
-        {weakDay}
+        {weekday}
         <DropdownIcon />
       </ListboxButton>
       <ListboxOptions
