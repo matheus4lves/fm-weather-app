@@ -19,7 +19,6 @@ export interface CurrentWeatherUnits {
   temperature_2m: TemperatureUnit;
   time: "iso8601";
   wind_speed_10m: WindSpeedUnit;
-  weather_code: number;
 }
 
 export interface DailyForecastData {
@@ -29,30 +28,18 @@ export interface DailyForecastData {
   weather_code: number[];
 }
 
-export interface DailyForecastUnits {
-  temperature_2m_max: TemperatureUnit;
-  temperature_2m_min: TemperatureUnit;
-  time: "iso8601";
-  weather_code: number[];
-}
-
 export interface HourlyForecastData {
   temperature_2m: number[];
   time: string[];
 }
 
-export interface HourlyForecastUnits {
-  temperature_2m: TemperatureUnit;
-  time: "iso8601";
 }
 
 export interface WeatherApiSuccess {
   current?: CurrentWeatherData;
   current_units?: CurrentWeatherUnits;
   daily?: DailyForecastData;
-  daily_units?: DailyForecastUnits;
   hourly?: HourlyForecastData;
-  hourly_units?: HourlyForecastUnits;
   latitude: number;
   longitude: number;
   timezone: string;
