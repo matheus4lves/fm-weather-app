@@ -82,7 +82,7 @@ export default function Page() {
               currentUnits={weatherData.current_units!}
             />
             <DailyForecast daily={weatherData.daily!} />
-            <HourlyForecast />
+            <HourlyForecast hourly={weatherData.hourly!} />
           </div>
         )}
       </main>

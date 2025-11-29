@@ -31,8 +31,13 @@ export interface DailyForecastData {
 export interface HourlyForecastData {
   temperature_2m: number[];
   time: string[];
+  weather_code: number[];
 }
 
+export interface HourlyForecastCardProps {
+  time: string;
+  temperature: number;
+  weatherCode: number;
 }
 
 export interface WeatherApiSuccess {

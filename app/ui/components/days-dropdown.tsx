@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 
 // External libraries
 import {
@@ -13,19 +13,15 @@ import DropdownIcon from "./icons/dropdown-icon";
 // Fonts
 import { dmSans } from "../fonts";
 
-export default function DaysDropdown() {
-  const days = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-
-  const [weekday, setWeekday] = useState<string>(days[0]);
-
+export default function DaysDropdown({
+  dropdownDays,
+  weekday,
+  setWeekday,
+}: {
+  dropdownDays: string[];
+  weekday: string;
+  setWeekday: Dispatch<SetStateAction<string>>;
+}) {
   return (
     // <Select className="flex flex-col gap-1">
 
@@ -40,7 +36,7 @@ export default function DaysDropdown() {
         anchor={{ to: "bottom end", gap: 10 }}
         className="w-[214px] p-100 rounded-12 bg-neutral-800 border border-neutral-600 flex flex-col gap-1"
       >
-        {days.map((day, index) => (
+        {dropdownDays.map((day, index) => (
           <ListboxOption
             key={index}
             value={day}
