@@ -24,7 +24,7 @@ export default function DaysDropdown({
 
     <Listbox value={weekday} onChange={setWeekday}>
       <ListboxButton
-        className={`flex gap-3 items-center px-200 py-100 rounded-8 bg-neutral-700 ${dmSans.className} text-preset-7 font-medium text-neutral-0`}
+        className={`flex gap-3 items-center px-200 py-100 rounded-8 bg-neutral-700 ${dmSans.className} text-preset-7 font-medium text-neutral-0 data-hover:cursor-pointer`}
       >
         {weekday}
         <DropdownIcon />
@@ -37,7 +37,7 @@ export default function DaysDropdown({
           <ListboxOption
             key={index}
             value={day}
-            className="px-100 py-125 rounded-8 bg-neutral-800 hover:bg-neutral-700"
+            className="px-100 py-125 rounded-8 bg-neutral-800 hover:bg-neutral-700 data-focus:cursor-pointer"
           >
             <span
               className={`${dmSans.className} text-preset-7 font-medium text-neutral-0`}

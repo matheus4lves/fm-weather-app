@@ -94,7 +94,7 @@ export default function UnitsDropdown() {
 
   return (
     <Menu>
-      <MenuButton className="bg-neutral-800 hover:bg-neutral-700 focus:outline-2 focus:outline-neutral-0 focus:outline-offset-3 px-125 md:px-200 py-100 md:py-150 rounded-6 md:rounded-8 flex items-center gap-1.5 md:gap-2.5">
+      <MenuButton className="bg-neutral-800 hover:bg-neutral-700 focus:outline-2 focus:outline-neutral-0 focus:outline-offset-3 px-125 md:px-200 py-100 md:py-150 rounded-6 md:rounded-8 flex items-center gap-1.5 md:gap-2.5 cursor-pointer">
         <GearIcon className="w-3.5 md:w-200 h-3.5 md:h-200" />
         <span
           className={`${dmSans.className} font-medium text-preset-8 md:text-[16px] text-neutral-0`}
@@ -109,7 +109,7 @@ export default function UnitsDropdown() {
       >
         <MenuItem>
           <button
-            className="px-100 py-125 mb-050 rounded-8 w-full text-start hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1"
+            className="px-100 py-125 mb-050 rounded-8 w-full text-start hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1 cursor-pointer"
             onClick={toggleMeasurementSystem}
           >
             {isMetric ? "Switch to Imperial" : "Switch to Metric"}
@@ -126,7 +126,7 @@ export default function UnitsDropdown() {
           <MenuItem>
             <button
               className={clsx(
-                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1 cursor-pointer",
                 isCelsius && "bg-neutral-700",
               )}
               onClick={event => {
@@ -151,7 +151,7 @@ export default function UnitsDropdown() {
           <MenuItem>
             <button
               className={clsx(
-                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1 cursor-pointer",
                 !isCelsius && "bg-neutral-700",
               )}
               onClick={event => {
@@ -187,7 +187,7 @@ export default function UnitsDropdown() {
           <MenuItem>
             <button
               className={clsx(
-                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1 cursor-pointer",
                 isKmh && "bg-neutral-700",
               )}
               onClick={event => {
@@ -212,7 +212,7 @@ export default function UnitsDropdown() {
           <MenuItem>
             <button
               className={clsx(
-                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1 cursor-pointer",
                 !isKmh && "bg-neutral-700",
               )}
               onClick={event => {
@@ -248,7 +248,7 @@ export default function UnitsDropdown() {
           <MenuItem>
             <button
               className={clsx(
-                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                "rounded-8 px-100 py-125 mb-050 w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1 cursor-pointer",
                 isMillimeters && "bg-neutral-700",
               )}
               onClick={event => {
@@ -273,7 +273,7 @@ export default function UnitsDropdown() {
           <MenuItem>
             <button
               className={clsx(
-                "rounded-8 px-100 py-125  w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1",
+                "rounded-8 px-100 py-125  w-full flex justify-between hover:bg-neutral-700 focus:outline-1 focus:outline-neutral-0 focus:outline-offset-1 cursor-pointer",
                 !isMillimeters && "bg-neutral-700",
               )}
               onClick={event => {
