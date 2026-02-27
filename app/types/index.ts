@@ -20,6 +20,11 @@ export interface SearchResultProps {
   setIsVisible: Dispatch<SetStateAction<boolean>>;
   setQuery: Dispatch<SetStateAction<string>>;
   setSelectedCity: Dispatch<SetStateAction<City | undefined>>;
+export interface DaysDropdownProps {
+  dropdownDays: string[];
+  weekday: string;
+  setWeekday: Dispatch<SetStateAction<string>>;
+}
 }
 
 export * from "./geocoding";

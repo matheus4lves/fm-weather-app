@@ -1,5 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-
 // External libraries
 import {
   Listbox,
@@ -13,15 +11,14 @@ import DropdownIcon from "./icons/dropdown-icon";
 // Fonts
 import { dmSans } from "../fonts";
 
+// Types
+import { DaysDropdownProps } from "@/types";
+
 export default function DaysDropdown({
   dropdownDays,
   weekday,
   setWeekday,
-}: {
-  dropdownDays: string[];
-  weekday: string;
-  setWeekday: Dispatch<SetStateAction<string>>;
-}) {
+}: DaysDropdownProps) {
   return (
     // <Select className="flex flex-col gap-1">
 
