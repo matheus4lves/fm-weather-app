@@ -6,7 +6,7 @@ import Image from "next/image";
 import clsx from "clsx";
 
 // Fonts
-import { dmSans } from "../fonts";
+import { dmSans } from "@/ui/fonts";
 
 // Types
 import { SearchResultProps } from "@/types";

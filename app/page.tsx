@@ -12,8 +12,8 @@ import { bricolageGrotesque } from "@/ui/fonts";
 // Components
 import SearchForm from "@/ui/components/search-form";
 import CurrentWeather from "@/ui/components/current-weather";
-import DailyForecast from "./ui/components/daily-forecast";
-import HourlyForecast from "./ui/components/hourly-forecast";
+import DailyForecast from "@/ui/components/daily-forecast";
+import HourlyForecast from "@/ui/components/hourly-forecast";
 
 // Types
 import { City, WeatherApiSuccess } from "./types";

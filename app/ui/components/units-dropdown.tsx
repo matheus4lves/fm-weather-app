@@ -16,7 +16,7 @@ import {
 } from "@headlessui/react";
 
 // Fonts
-import { dmSans } from "../fonts";
+import { dmSans } from "@/ui/fonts";
 
 // Components
 import GearIcon from "./icons/gear-icon";

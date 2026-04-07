@@ -7,7 +7,7 @@ import { useFormStatus } from "react-dom";
 import axios from "axios";
 
 // Fonts
-import { dmSans } from "../fonts";
+import { dmSans } from "@/ui/fonts";
 
 // Components
 import SearchInProgress from "./search-in-progress";

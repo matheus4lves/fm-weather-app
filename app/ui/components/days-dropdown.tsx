@@ -9,7 +9,7 @@ import {
 import DropdownIcon from "./icons/dropdown-icon";
 
 // Fonts
-import { dmSans } from "../fonts";
+import { dmSans } from "@/ui/fonts";
 
 // Types
 import { DaysDropdownProps } from "@/types";

@@ -5,7 +5,7 @@ import { getWeatherIconSrc } from "@/lib/weather";
 import { format } from "date-fns";
 
 // Fonts
-import { dmSans } from "../fonts";
+import { dmSans } from "@/ui/fonts";
 
 // Types
 import { DailyForecastData } from "@/types";

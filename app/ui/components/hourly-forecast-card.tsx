@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 // Fonts
-import { dmSans } from "../fonts";
+import { dmSans } from "@/ui/fonts";
 
 // Lib
 import { getWeatherIconSrc } from "@/lib/weather";

@@ -1,5 +1,5 @@
 // Fonts
-import { dmSans } from "../fonts";
+import { dmSans } from "@/ui/fonts";
 
 // Components
 import LoadingIcon from "./icons/loading-icon";

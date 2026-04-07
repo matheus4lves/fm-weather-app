@@ -7,7 +7,7 @@ import { getWeatherIconSrc } from "@/lib/weather";
 import { format } from "date-fns";
 
 // Fonts
-import { dmSans, dmSansItalic600 } from "../fonts";
+import { dmSans, dmSansItalic600 } from "@/ui/fonts";
 
 // Types
 import { City, CurrentWeatherData, CurrentWeatherUnits } from "@/types";

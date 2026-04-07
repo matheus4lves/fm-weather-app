@@ -1,4 +1,4 @@
-import { dmSans } from "../fonts";
+import { dmSans } from "@/ui/fonts";
 
 export default function NotFound() {
   return (
