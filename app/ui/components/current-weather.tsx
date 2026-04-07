@@ -10,17 +10,13 @@ import { format } from "date-fns";
 import { dmSans, dmSansItalic600 } from "@/ui/fonts";
 
 // Types
-import { City, CurrentWeatherData, CurrentWeatherUnits } from "@/types";
+import { CurrentWeatherProps } from "@/types";
 
 export default function CurrentWeather({
-  selectedCity,
+  city,
   current,
   currentUnits,
-}: {
-  selectedCity: City;
-  current: CurrentWeatherData;
-  currentUnits: CurrentWeatherUnits;
-}) {
+}: CurrentWeatherProps) {
   const common = {
     alt: "An illustration of a night sky with some clouds and stars.",
   };
@@ -62,7 +58,7 @@ export default function CurrentWeather({
             <p
               className={`${dmSans.className} font-bold text-preset-4 text-neutral-0 text-center mb-150`}
             >
-              {selectedCity.name}, {selectedCity.country}
+              {city.name}, {city.country}
             </p>
             <p
               className={`${dmSans.className} font-medium text-preset-6 text-neutral-0 opacity-80 text-center`}

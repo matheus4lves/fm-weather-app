@@ -1,5 +1,6 @@
 import { Dispatch, FormEvent, RefObject, SetStateAction } from "react";
 
+import { CurrentWeatherData, CurrentWeatherUnits } from "./weather";
 import { City } from "./geocoding";
 
 export interface SearchFormProps {
@@ -11,6 +12,16 @@ export interface SearchFormProps {
   setIsVisible: Dispatch<SetStateAction<boolean>>;
   setQuery: Dispatch<SetStateAction<string>>;
   setSelectedCity: Dispatch<SetStateAction<City | undefined>>;
+export interface CurrentWeatherProps {
+  city: City;
+  current: CurrentWeatherData;
+  currentUnits: CurrentWeatherUnits;
+}
+
+export interface HourlyForecastCardProps {
+  time: string;
+  temperature: number;
+  weatherCode: number;
 }
 
 export interface SearchResultProps {

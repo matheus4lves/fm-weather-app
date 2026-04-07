@@ -34,12 +34,6 @@ export interface HourlyForecastData {
   weather_code: number[];
 }
 
-export interface HourlyForecastCardProps {
-  time: string;
-  temperature: number;
-  weatherCode: number;
-}
-
 export interface WeatherApiSuccess {
   current?: CurrentWeatherData;
   current_units?: CurrentWeatherUnits;
@@ -48,9 +42,4 @@ export interface WeatherApiSuccess {
   latitude: number;
   longitude: number;
   timezone: string;
-}
-
-export interface WeatherApiError {
-  error: true;
-  reason: string;
 }
