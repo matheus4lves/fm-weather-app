@@ -34,6 +34,9 @@ export interface DaysDropdownProps {
   weekday: string;
   setWeekday: Dispatch<SetStateAction<string>>;
 }
+
+export interface ApiErrorProps {
+  onRetry: () => void;
 }
 
 export * from "./geocoding";

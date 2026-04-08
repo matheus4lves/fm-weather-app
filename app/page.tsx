@@ -14,6 +14,7 @@ import SearchForm from "@/ui/components/search-form";
 import CurrentWeather from "@/ui/components/current-weather";
 import DailyForecast from "@/ui/components/daily-forecast";
 import HourlyForecast from "@/ui/components/hourly-forecast";
+import ApiError from "@/api-error";
 
 // Types
 import {
@@ -27,11 +28,15 @@ export default function Home() {
   const [city, setCity] = useState<City | null>(null);
   const [weatherData, setWeatherData] =
     useState<WeatherForecastApiResponse | null>(null);
+  const [apiErrorType, setApiErrorType] = useState<
+    "geocoding" | "weather" | null
+  >(null);
   const [query, setQuery] = useState("");
   const searchParams = useSearchParams();
   const inputRef = useRef<HTMLInputElement>(null);
 
   async function handleSearch(query: string) {
+    setApiErrorType(null);
 
     try {
       const response = await axios.get<GeocodingApiResponse>(
@@ -51,6 +56,7 @@ export default function Home() {
         }
       }
     } catch (error) {
+      setApiErrorType("geocoding");
       if (axios.isAxiosError(error) && error.response) {
         console.log(error.response.data);
       } else {
@@ -79,6 +85,7 @@ export default function Home() {
   }
   const fetchWeather = useCallback(
     async (signal?: AbortSignal) => {
+      setApiErrorType(prev => (prev === "weather" ? null : prev));
 
       try {
         const response = await axios.get<WeatherForecastApiResponse>(
@@ -93,6 +100,7 @@ export default function Home() {
       } catch (error) {
         if (axios.isCancel(error)) return;
 
+        setApiErrorType("weather");
         if (axios.isAxiosError(error) && error.response) {
           console.log(error.response.data);
         } else {
@@ -119,6 +127,13 @@ export default function Home() {
     return () => controller.abort();
   }, [fetchWeather, searchParams]);
 
+  if (apiErrorType === "geocoding") {
+    return <ApiError onRetry={() => handleSearch(query)} />;
+  }
+
+  if (apiErrorType === "weather") {
+    return <ApiError onRetry={() => fetchWeather()} />;
+  }
 
   return (
     <>
