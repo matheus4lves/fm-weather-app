@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 
 // External libraries
@@ -16,54 +16,109 @@ import DailyForecast from "@/ui/components/daily-forecast";
 import HourlyForecast from "@/ui/components/hourly-forecast";
 
 // Types
-import { City, WeatherApiSuccess } from "./types";
+import {
+  City,
+  WeatherForecastApiResponse,
+  GeocodingApiResponse,
+} from "@/types";
 
-export default function Page() {
-  const [selectedCity, setSelectedCity] = useState<City>();
-  const [weatherData, setWeatherData] = useState<WeatherApiSuccess>();
-
+export default function Home() {
+  const [searchResults, setSearchResults] = useState<City[] | null>(null);
+  const [city, setCity] = useState<City | null>(null);
+  const [weatherData, setWeatherData] =
+    useState<WeatherForecastApiResponse | null>(null);
+  const [query, setQuery] = useState("");
   const searchParams = useSearchParams();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const controller = new AbortController(); // Cancels request on component unmount
-    const timeoutSignal = AbortSignal.timeout(5000); // Cancels request on timeout
-    const combinedSignal = AbortSignal.any([controller.signal, timeoutSignal]);
+  async function handleSearch(query: string) {
 
-    async function getWeatherData() {
+    try {
+      const response = await axios.get<GeocodingApiResponse>(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${query}`,
+      );
+      if (response.data.results) {
+        const cities = await addFlagsToCities(response.data.results);
+
+        setSearchResults(await Promise.all(cities));
+      } else if (!response.data.results) {
+        setSearchResults([]);
+        setWeatherData(null);
+        setQuery("");
+
+        if (inputRef.current) {
+          inputRef.current.focus();
+        }
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        console.log(error.response.data);
+      } else {
+        console.error(error);
+      }
+    }
+  }
+
+  async function addFlagsToCities(cities: City[]) {
+    return cities.map(async (city: City) => {
+      const response = await axios.get(
+        `https://restcountries.com/v3.1/alpha/${city.country_code}?fields=flags`,
+      );
+
+      const {
+        flags: { svg, alt },
+      } = response.data;
+
+      return { ...city, countryFlagURL: svg, countryFlagAlt: alt };
+    });
+  }
+
+  async function handleSubmit(formData: FormData) {
+    const queryValue = formData.get("name") as string;
+    await handleSearch(queryValue);
+  }
+  const fetchWeather = useCallback(
+    async (signal?: AbortSignal) => {
+
       try {
-        // Data is either of type WeatherApiSuccess (response.data) or
-        // WeatherApiError (error.response.data)
-        const { data } = await axios.get(
+        const response = await axios.get<WeatherForecastApiResponse>(
           `https://api.open-meteo.com/v1/forecast`,
           {
             params: searchParams,
-            signal: combinedSignal,
+            signal,
           },
         );
 
-        console.log("Weather data:", data);
-        setWeatherData(data);
+        setWeatherData(response.data);
       } catch (error) {
-        // See https://axios-http.com/docs/handling_errors
-        if (axios.isAxiosError(error)) {
-          if (error.response) {
-            console.log(error.response.data);
-            console.log(error.response.status);
-            console.log(error.response.headers);
-          } else if (error.request) {
-            console.log(error.request);
-          } else {
-            console.log("Error", error.message);
-          }
-          console.log(error.config);
+        if (axios.isCancel(error)) return;
+
+        if (axios.isAxiosError(error) && error.response) {
+          console.log(error.response.data);
+        } else {
+          console.error(error);
         }
       }
-    }
+    },
+    [searchParams],
+  );
 
-    getWeatherData();
+  useEffect(() => {
+    // Guard: Only fetch weather if the URL has coordinates
+    const latitude = searchParams.get("latitude");
+    const longitude = searchParams.get("longitude");
+
+    if (!latitude || !longitude) return;
+
+    const controller = new AbortController();
+    const timeoutSignal = AbortSignal.timeout(5000);
+    const combinedSignal = AbortSignal.any([controller.signal, timeoutSignal]);
+
+    fetchWeather(combinedSignal);
 
     return () => controller.abort();
-  }, [searchParams]);
+  }, [fetchWeather, searchParams]);
+
 
   return (
     <>
@@ -73,11 +128,19 @@ export default function Page() {
         How&apos;s the sky looking today?
       </h1>
       <main className="max-w-[1216px] lg:mx-auto">
-        <SearchForm setSelectedCity={setSelectedCity} />
-        {selectedCity && weatherData && (
+        <SearchForm
+          setCity={setCity}
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+          inputRef={inputRef}
+          query={query}
+          setQuery={setQuery}
+          handleSubmit={handleSubmit}
+        />
+        {city && weatherData && (
           <div className="grid grid-cols-1 gap-y-8 xl2:grid-cols-3 xl2:grid-rows-[repeat(2,minmax(0,auto))] xl2:gap-x-8 xl2:gap-y-12">
             <CurrentWeather
-              selectedCity={selectedCity}
+              city={city}
               current={weatherData.current!}
               currentUnits={weatherData.current_units!}
             />

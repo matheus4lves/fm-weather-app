@@ -9,3 +9,6 @@ export interface City {
   countryFlagURL?: string;
   countryFlagAlt?: string;
 }
+export interface GeocodingApiResponse {
+  results?: City[];
+}

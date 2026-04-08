@@ -34,7 +34,7 @@ export interface HourlyForecastData {
   weather_code: number[];
 }
 
-export interface WeatherApiSuccess {
+export interface WeatherForecastApiResponse {
   current?: CurrentWeatherData;
   current_units?: CurrentWeatherUnits;
   daily?: DailyForecastData;
