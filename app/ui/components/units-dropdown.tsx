@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 // External libraries
@@ -33,18 +33,15 @@ export default function UnitsDropdown() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const createQueryString = useCallback(
-    (...params: { name: string; value: string }[]) => {
-      const urlSearchParams = new URLSearchParams(searchParams.toString());
+  function createQueryString(...params: { name: string; value: string }[]) {
+    const urlSearchParams = new URLSearchParams(searchParams.toString());
 
-      for (const param of params) {
-        urlSearchParams.set(param.name, param.value);
-      }
+    for (const param of params) {
+      urlSearchParams.set(param.name, param.value);
+    }
 
-      return urlSearchParams.toString();
-    },
-    [searchParams],
-  );
+    return urlSearchParams.toString();
+  }
 
   function toggleMeasurementSystem() {
     if (isMetric) {
