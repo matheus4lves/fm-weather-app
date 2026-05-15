@@ -17,6 +17,7 @@ export default function SearchResult({
   inputRef,
   searchResults,
   setSearchResults,
+  query,
   setQuery,
   setCity,
 }: SearchResultProps) {
@@ -32,7 +33,7 @@ export default function SearchResult({
     }
   }
 
-  if (status.pending) {
+  if (status.pending && query.length > 1) {
     return <SearchInProgress />;
   }
 

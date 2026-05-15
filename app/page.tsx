@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 
+import { toast } from "@/ui/components/toast";
+
 // External libraries
 import axios from "axios";
 
@@ -47,6 +49,15 @@ export default function Home() {
 
     try {
       const validatedQuery = QuerySchema.safeParse(query);
+
+      if (!validatedQuery.success) {
+        toast({
+          title: "Bad search!",
+          description: "Type at least two characters.",
+        });
+
+        return;
+      }
 
       const params = new URLSearchParams({ name: validatedQuery.data });
 

@@ -1,7 +1,11 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+
 import "@/globals.css";
+
 import Header from "@/ui/components/header";
+import { Toaster } from "sonner";
+
 import { dmSans } from "@/ui/fonts";
 
 export const metadata: Metadata = {
@@ -21,6 +25,7 @@ export default function RootLayout({
       >
         <Header />
         <Suspense fallback={null}>{children}</Suspense>
+        <Toaster />
       </body>
     </html>
   );
