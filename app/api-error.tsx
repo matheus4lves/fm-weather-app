@@ -6,7 +6,7 @@ import Image from "next/image";
 import { bricolageGrotesque, dmSans } from "@/ui/fonts";
 
 // Types
-import { ApiErrorProps } from "@/types";
+import { ApiErrorProps } from "@/schemas";
 
 export default function ApiError({ onRetry }: ApiErrorProps) {
   return (

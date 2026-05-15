@@ -3,7 +3,7 @@ import {
   BaseSearchProps,
   SearchFormProps,
   SearchResultProps,
-} from "@/types";
+} from "@/schemas";
 
 export const createMockCity = (overrides?: Partial<City>) => ({
   admin1: "Santa Catarina",
@@ -24,12 +24,12 @@ const createBaseSearchProps = (): BaseSearchProps => ({
   searchResults: null,
   setSearchResults: jest.fn(),
   setCity: jest.fn(),
+  query: "",
   setQuery: jest.fn(),
 });
 
 export const defaultSearchFormProps: SearchFormProps = {
   ...createBaseSearchProps(),
-  query: "",
   handleSubmit: jest.fn(),
 };
 

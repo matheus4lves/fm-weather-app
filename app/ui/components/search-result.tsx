@@ -11,7 +11,7 @@ import SearchInProgress from "./search-in-progress";
 import NotFound from "./not-found";
 
 // Types
-import { SearchResultProps, City } from "@/types";
+import { SearchResultProps, City } from "@/schemas";
 
 export default function SearchResult({
   inputRef,

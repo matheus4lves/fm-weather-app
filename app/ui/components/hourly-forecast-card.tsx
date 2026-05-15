@@ -7,7 +7,7 @@ import { dmSans } from "@/ui/fonts";
 import { getWeatherIconSrc } from "@/lib/weather";
 
 // Types
-import { HourlyForecastCardProps } from "@/types";
+import { HourlyForecastCardProps } from "@/schemas";
 
 export default function HourlyForecastCard({
   time,

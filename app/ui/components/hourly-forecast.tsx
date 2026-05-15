@@ -12,7 +12,7 @@ import DaysDropdown from "./days-dropdown";
 import HourlyForecastCard from "./hourly-forecast-card";
 
 // Types
-import { HourlyForecastData } from "@/types";
+import { HourlyForecastData } from "@/schemas";
 
 export default function HourlyForecast({
   hourly: { time, temperature_2m, weather_code },

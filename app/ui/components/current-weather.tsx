@@ -10,7 +10,7 @@ import { format } from "date-fns";
 import { dmSans, dmSansItalic600 } from "@/ui/fonts";
 
 // Types
-import { CurrentWeatherProps } from "@/types";
+import { CurrentWeatherProps } from "@/schemas";
 
 export default function CurrentWeather({
   city,

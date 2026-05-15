@@ -8,7 +8,7 @@ import MagnifyingGlassIcon from "./icons/magnifying-glass-icon";
 import SearchResult from "./search-result";
 
 // Types
-import { SearchFormProps } from "@/types";
+import { SearchFormProps } from "@/schemas";
 
 export default function SearchForm({
   setCity,
@@ -46,6 +46,7 @@ export default function SearchForm({
         inputRef={inputRef}
         searchResults={searchResults}
         setSearchResults={setSearchResults}
+        query={query}
         setQuery={setQuery}
         setCity={setCity}
       />

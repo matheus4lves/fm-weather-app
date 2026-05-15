@@ -12,7 +12,7 @@ import DropdownIcon from "./icons/dropdown-icon";
 import { dmSans } from "@/ui/fonts";
 
 // Types
-import { DaysDropdownProps } from "@/types";
+import { DaysDropdownProps } from "@/schemas";
 
 export default function DaysDropdown({
   dropdownDays,

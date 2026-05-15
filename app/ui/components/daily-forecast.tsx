@@ -8,7 +8,7 @@ import { format } from "date-fns";
 import { dmSans } from "@/ui/fonts";
 
 // Types
-import { DailyForecastData } from "@/types";
+import { DailyForecastData } from "@/schemas";
 
 export default function DailyForecast({ daily }: { daily: DailyForecastData }) {
   const dailyForecast: {

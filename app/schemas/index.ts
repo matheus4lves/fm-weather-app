@@ -6,12 +6,12 @@ export interface BaseSearchProps {
   inputRef: RefObject<HTMLInputElement | null>;
   searchResults: City[] | null;
   setSearchResults: Dispatch<SetStateAction<City[] | null>>;
+  query: string;
   setQuery: Dispatch<SetStateAction<string>>;
   setCity: Dispatch<SetStateAction<City | null>>;
 }
 
 export interface SearchFormProps extends BaseSearchProps {
-  query: string;
   handleSubmit: (formData: FormData) => Promise<void>;
 }
 
@@ -41,3 +41,4 @@ export interface ApiErrorProps {
 
 export * from "./geocoding";
 export * from "./weather";
+export * from "./query";

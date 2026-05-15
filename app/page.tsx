@@ -16,12 +16,19 @@ import DailyForecast from "@/ui/components/daily-forecast";
 import HourlyForecast from "@/ui/components/hourly-forecast";
 import ApiError from "@/api-error";
 
+// Schemas
+import {
+  QuerySchema,
+  GeocodingApiResponseSchema,
+  WeatherForecastApiResponseSchema,
+} from "@/schemas";
+
 // Types
 import {
   City,
   WeatherForecastApiResponse,
   GeocodingApiResponse,
-} from "@/types";
+} from "@/schemas";
 
 export default function Home() {
   const [searchResults, setSearchResults] = useState<City[] | null>(null);
@@ -39,14 +46,20 @@ export default function Home() {
     setApiErrorType(null);
 
     try {
-      const response = await axios.get<GeocodingApiResponse>(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${query}`,
-      );
-      if (response.data.results) {
-        const cities = await addFlagsToCities(response.data.results);
+      const validatedQuery = QuerySchema.safeParse(query);
 
+      const params = new URLSearchParams({ name: validatedQuery.data });
+
+      const { data } = await axios.get<GeocodingApiResponse>(
+        `https://geocoding-api.open-meteo.com/v1/search?${params.toString()}`,
+      );
+
+      const validatedData = GeocodingApiResponseSchema.parse(data);
+
+      if (validatedData.results) {
+        const cities = await addFlagsToCities(validatedData.results);
         setSearchResults(await Promise.all(cities));
-      } else if (!response.data.results) {
+      } else if (!validatedData.results) {
         setSearchResults([]);
         setWeatherData(null);
         setQuery("");
@@ -80,15 +93,15 @@ export default function Home() {
   }
 
   async function handleSubmit(formData: FormData) {
-    const queryValue = formData.get("name") as string;
-    await handleSearch(queryValue);
+    await handleSearch(formData.get("name") as string);
   }
+
   const fetchWeather = useCallback(
     async (signal?: AbortSignal) => {
       setApiErrorType(prev => (prev === "weather" ? null : prev));
 
       try {
-        const response = await axios.get<WeatherForecastApiResponse>(
+        const { data } = await axios.get<WeatherForecastApiResponse>(
           `https://api.open-meteo.com/v1/forecast`,
           {
             params: searchParams,
@@ -96,7 +109,9 @@ export default function Home() {
           },
         );
 
-        setWeatherData(response.data);
+        const validatedData = WeatherForecastApiResponseSchema.parse(data);
+
+        setWeatherData(validatedData);
       } catch (error) {
         if (axios.isCancel(error)) return;
 
