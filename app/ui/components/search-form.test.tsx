@@ -1,21 +1,16 @@
+jest.mock("./search-result", () => ({
+  __esModule: true,
+  default: () => <div data-testid="search-result">SearchResult</div>,
+}));
+
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useFormStatus } from "react-dom";
 
 import SearchForm from "./search-form";
 
-import { createMockCity, defaultSearchFormProps } from "@/lib/test-utils";
-
-jest.mock("react-dom", () => ({
-  ...jest.requireActual("react-dom"),
-  useFormStatus: jest.fn(),
-}));
+import { defaultSearchFormProps } from "@/lib/test-utils";
 
 describe("SearchForm", () => {
-  beforeEach(() => {
-    (useFormStatus as jest.Mock).mockReturnValue({ pending: false });
-  });
-
   it("renders the SearchForm component", () => {
     render(<SearchForm {...defaultSearchFormProps} />);
 
@@ -35,10 +30,13 @@ describe("SearchForm", () => {
         handleSubmit={mockEventHandler}
       />,
     );
+  it("renders SearchResult component", () => {
+    render(<SearchForm {...defaultSearchFormProps} />);
 
     const buttonElement = screen.getByRole("button", { name: /Search/i });
     await user.click(buttonElement);
     expect(mockEventHandler).toHaveBeenCalledTimes(1);
+    expect(screen.getByTestId("search-result")).toBeInTheDocument();
   });
 
   it("calls the onChange event handler", async () => {
@@ -52,28 +50,14 @@ describe("SearchForm", () => {
     expect(mockSetQuery).toHaveBeenCalledTimes(10);
   });
 
-  it("renders SearchInProgress while a search is in progress", () => {
-    (useFormStatus as jest.Mock).mockReturnValue({ pending: true });
-    render(<SearchForm {...defaultSearchFormProps} />);
 
-    expect(screen.getByText(/Search in progress/i)).toBeInTheDocument();
   });
 
-  it("renders search results when available", () => {
-    const mockSearchResults = [createMockCity()];
     render(
       <SearchForm
         {...defaultSearchFormProps}
-        searchResults={mockSearchResults}
       />,
     );
 
-    expect(screen.getByText(/Balneário/i)).toBeInTheDocument();
-  });
-
-  it("renders NotFound when the city cannot be found", () => {
-    render(<SearchForm {...defaultSearchFormProps} searchResults={[]} />);
-
-    expect(screen.getByText(/No search result found!/i)).toBeInTheDocument();
   });
 });
