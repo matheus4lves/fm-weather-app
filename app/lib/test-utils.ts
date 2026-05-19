@@ -33,6 +33,6 @@ export const defaultSearchFormProps: SearchFormProps = {
   handleSubmit: jest.fn(),
 };
 
-export const defaultSearchResultsProps: SearchResultProps = {
+export const defaultSearchResultProps: SearchResultProps = {
   ...createBaseSearchProps(),
 };

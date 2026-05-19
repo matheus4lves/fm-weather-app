@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 
 import SearchResult from "./search-result";
 
-import { defaultSearchResultsProps, createMockCity } from "@/lib/test-utils";
 
 jest.mock("react-dom", () => ({
   ...jest.requireActual("react-dom"),
@@ -20,6 +19,7 @@ jest.mock("next/navigation", () => ({
 describe("SearchResult", () => {
   const user = userEvent.setup();
 
+import { defaultSearchResultProps, createMockCity } from "@/lib/test-utils";
   beforeEach(() => {
     (useFormStatus as jest.Mock).mockReturnValue({ pending: false });
     (usePathname as jest.Mock).mockReturnValue("/");
@@ -35,7 +35,7 @@ describe("SearchResult", () => {
   });
 
   it("renders NotFound when there are no search results", () => {
-    render(<SearchResult {...defaultSearchResultsProps} searchResults={[]} />);
+    render(<SearchResult {...defaultSearchResultProps} searchResults={[]} />);
 
     expect(screen.queryByText(/Search in progress/i)).not.toBeInTheDocument();
     expect(screen.getByText(/No search result found!/i)).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe("SearchResult", () => {
     ];
     render(
       <SearchResult
-        {...defaultSearchResultsProps}
+        {...defaultSearchResultProps}
         searchResults={mockSearchResults}
       />,
     );
@@ -63,7 +63,7 @@ describe("SearchResult", () => {
 
     render(
       <SearchResult
-        {...defaultSearchResultsProps}
+        {...defaultSearchResultProps}
         searchResults={[mockCity]}
         inputRef={mockInputRef}
       />,
@@ -73,11 +73,11 @@ describe("SearchResult", () => {
     const cityLink = screen.getByRole("link");
     await user.click(cityLink);
 
-    expect(defaultSearchResultsProps.setCity).toHaveBeenCalledWith(mockCity);
-    expect(defaultSearchResultsProps.setSearchResults).toHaveBeenCalledWith(
+    expect(defaultSearchResultProps.setCity).toHaveBeenCalledWith(mockCity);
+    expect(defaultSearchResultProps.setSearchResults).toHaveBeenCalledWith(
       null,
     );
-    expect(defaultSearchResultsProps.setQuery).toHaveBeenCalledWith("");
+    expect(defaultSearchResultProps.setQuery).toHaveBeenCalledWith("");
     expect(focusSpy).toHaveBeenCalled();
 
     focusSpy.mockRestore();
