@@ -33,6 +33,10 @@ describe("Home", () => {
 
   it("renders Home component", () => {
     render(<Home />);
+
+    expect(
+      screen.getByRole("heading", { name: /How's the sky looking today?/i }),
+    ).toBeInTheDocument();
     expect(screen.getByTestId("search-form")).toBeInTheDocument();
   });
 });
