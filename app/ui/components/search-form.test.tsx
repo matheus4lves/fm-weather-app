@@ -11,7 +11,7 @@ import SearchForm from "./search-form";
 import { defaultSearchFormProps } from "@/lib/test-utils";
 
 describe("SearchForm", () => {
-  it("renders the SearchForm component", () => {
+  it("renders input and submit button", () => {
     render(<SearchForm {...defaultSearchFormProps} />);
 
     const inputElement = screen.getByPlaceholderText(/Search for a place.../i);
