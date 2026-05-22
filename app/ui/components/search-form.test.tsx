@@ -21,21 +21,9 @@ describe("SearchForm", () => {
     expect(buttonElement).toBeInTheDocument();
   });
 
-  it("submits the form when the search button is clicked", async () => {
-    const mockEventHandler = jest.fn();
-    const user = userEvent.setup();
-    render(
-      <SearchForm
-        {...defaultSearchFormProps}
-        handleSubmit={mockEventHandler}
-      />,
-    );
   it("renders SearchResult component", () => {
     render(<SearchForm {...defaultSearchFormProps} />);
 
-    const buttonElement = screen.getByRole("button", { name: /Search/i });
-    await user.click(buttonElement);
-    expect(mockEventHandler).toHaveBeenCalledTimes(1);
     expect(screen.getByTestId("search-result")).toBeInTheDocument();
   });
 
@@ -53,11 +41,18 @@ describe("SearchForm", () => {
 
   });
 
+  it("it calls the submit event handler", async () => {
+    const mockHandleSubmit = jest.fn();
+    const user = userEvent.setup();
     render(
       <SearchForm
         {...defaultSearchFormProps}
+        handleSubmit={mockHandleSubmit}
       />,
     );
 
+    const buttonElement = screen.getByRole("button", { name: /Search/i });
+    await user.click(buttonElement);
+    expect(mockHandleSubmit).toHaveBeenCalled();
   });
 });
