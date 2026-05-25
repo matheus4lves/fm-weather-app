@@ -79,7 +79,8 @@ describe("SearchResult", () => {
     expect(screen.getByRole("list")).toBeInTheDocument();
   });
 
-  it("calls handlers and focuses input when a city is clicked", async () => {
+  it("handles click on a city", async () => {
+    const user = userEvent.setup();
     const mockCity = createMockCity();
     const mockInputRef = { current: document.createElement("input") };
     const focusSpy = jest.spyOn(mockInputRef.current, "focus");
