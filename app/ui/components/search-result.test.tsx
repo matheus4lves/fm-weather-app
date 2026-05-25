@@ -24,6 +24,16 @@ describe("SearchResult", () => {
     jest.clearAllMocks();
   });
 
+  it("renders nothing by default", () => {
+    render(<SearchResult {...defaultSearchResultProps} searchResults={null} />);
+
+    expect(screen.queryByText(/Search in Progress/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/No search result found!/i),
+    ).not.toBeInTheDocument();
+    expect(screen.queryByRole("list")).not.toBeInTheDocument();
+  });
+
   it("renders loading state and hides previous results", () => {
     (useFormStatus as jest.Mock).mockReturnValue({ pending: true });
 
@@ -38,6 +48,12 @@ describe("SearchResult", () => {
     expect(screen.getByText(/Search in progress/i)).toBeInTheDocument();
     expect(screen.queryByRole("list")).not.toBeInTheDocument();
   });
+
+  it("does not render loading when the query is too short", () => {
+    (useFormStatus as jest.Mock).mockReturnValue({ pending: true });
+    render(<SearchResult {...defaultSearchResultProps} query="B" />);
+
+    expect(screen.queryByText(/Search in progress/i)).not.toBeInTheDocument();
   });
 
   it("renders NotFound when there are no search results", () => {
