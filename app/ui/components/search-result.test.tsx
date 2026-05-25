@@ -24,12 +24,20 @@ describe("SearchResult", () => {
     jest.clearAllMocks();
   });
 
-  it("renders SearchInProgress while a search is in progress", () => {
+  it("renders loading state and hides previous results", () => {
     (useFormStatus as jest.Mock).mockReturnValue({ pending: true });
 
-    render(<SearchResult {...defaultSearchResultsProps} />);
+    render(
+      <SearchResult
+        {...defaultSearchResultProps}
+        query="Balneário"
+        searchResults={[createMockCity()]} // Mock stale (outdated) data
+      />,
+    );
 
     expect(screen.getByText(/Search in progress/i)).toBeInTheDocument();
+    expect(screen.queryByRole("list")).not.toBeInTheDocument();
+  });
   });
 
   it("renders NotFound when there are no search results", () => {
