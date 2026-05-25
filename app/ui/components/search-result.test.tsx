@@ -1,11 +1,3 @@
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import { useFormStatus } from "react-dom";
-import { usePathname } from "next/navigation";
-
-import SearchResult from "./search-result";
-
-
 jest.mock("react-dom", () => ({
   ...jest.requireActual("react-dom"),
   useFormStatus: jest.fn(),
@@ -16,10 +8,16 @@ jest.mock("next/navigation", () => ({
   usePathname: jest.fn(),
 }));
 
-describe("SearchResult", () => {
-  const user = userEvent.setup();
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { useFormStatus } from "react-dom";
+import { usePathname } from "next/navigation";
+
+import SearchResult from "./search-result";
 
 import { defaultSearchResultProps, createMockCity } from "@/lib/test-utils";
+
+describe("SearchResult", () => {
   beforeEach(() => {
     (useFormStatus as jest.Mock).mockReturnValue({ pending: false });
     (usePathname as jest.Mock).mockReturnValue("/");
