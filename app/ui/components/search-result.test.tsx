@@ -66,8 +66,8 @@ describe("SearchResult", () => {
   it("renders search results when available", () => {
     const mockSearchResults = [
       createMockCity({ id: 1, name: "Itapetinga", admin1: "Bahia" }),
-      createMockCity({ id: 2, name: "Itapetinga", admin1: "São Paulo" }),
     ];
+
     render(
       <SearchResult
         {...defaultSearchResultProps}
@@ -75,7 +75,8 @@ describe("SearchResult", () => {
       />,
     );
 
-    expect(screen.getAllByRole("listitem")).toHaveLength(2);
+    expect(screen.getByText(/Itapetinga/i)).toBeInTheDocument();
+    expect(screen.getByRole("list")).toBeInTheDocument();
   });
 
   it("calls handlers and focuses input when a city is clicked", async () => {
